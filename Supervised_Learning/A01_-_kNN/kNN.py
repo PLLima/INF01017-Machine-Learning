@@ -19,7 +19,7 @@ class knn_model(KNeighborsClassifier):
     def get_k_neighbors(self, X):
         neighbors_distance, neighbors_ids = self.kneighbors(X)
         neighbors_dataframe = pd.DataFrame({
-            'ID': X,
+            'Testing Atributes': X,
             'k-Neighbor ID': neighbors_ids.tolist(),
             'Distance': neighbors_distance.tolist(),
             'Prediction': self.predict(X),
@@ -30,6 +30,18 @@ class knn_model(KNeighborsClassifier):
         return self.score(self.testing_atributes, self.testing_target_attributes)
 
     def get_model_results(self):
-        print(f'\nModel Predictions with k = {self.n_neighbors}:\n')
         print(self.get_k_neighbors(self.testing_atributes))
         print(f'\nModel Accuracy:\n\n     {self.get_accuracy() * 100}%\n')
+
+for k in range(1, 9, 2):
+    original_model = knn_model(n_neighbors=k)
+    normalized_model = knn_model(n_neighbors=k)
+    original_model.set_training_file('./Original_Data_2Features/TrainingData_2F_Original.txt')
+    normalized_model.set_training_file('./Normalized_Data_2Features/TrainingData_2F_Norm.txt')
+    original_model.set_testing_file('./Original_Data_2Features/TestingData_2F_Original.txt')
+    normalized_model.set_testing_file('./Normalized_Data_2Features/TestingData_2F_Norm.txt')
+    print(f'\nModel Predictions for k = {k}:\n')
+    print('\nOriginal Data:\n')
+    original_model.get_model_results()
+    print('\nNormalized Data:\n')
+    normalized_model.get_model_results()
