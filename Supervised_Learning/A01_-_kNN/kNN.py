@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 
@@ -21,7 +22,7 @@ class knn_model(KNeighborsClassifier):
         neighbors_dataframe = pd.DataFrame({
             'Testing Atributes': X,
             'k-Neighbor ID': neighbors_ids.tolist(),
-            'Distance': neighbors_distance.tolist(),
+            'Distance': np.round(neighbors_distance, 3).tolist(),
             'Prediction': self.predict(X),
         })
         return neighbors_dataframe
@@ -45,3 +46,4 @@ for k in range(1, 9, 2):
     original_model.get_model_results()
     print('\nNormalized Data:\n')
     normalized_model.get_model_results()
+
