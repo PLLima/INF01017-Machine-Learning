@@ -1,0 +1,3 @@
+[submodule "Car-Fuel-Efficiency-Predictor"]
+	path = Car-Fuel-Efficiency-Predictor
+	url = https://github.com/PLLima/Car-Fuel-Efficiency-Predictor.git
